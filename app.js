@@ -58,7 +58,15 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
-/* GET home page. */
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/frontend/build/home'));
+  });
+
+app.get('/', function(req, res, next) {
+    return res.redirect('/home');
+});
+
+/*
 app.get('/', function(req, res, next) {
     if(req.session.netid) {
         return res.render('index', { login_link: './logout_old',
@@ -67,17 +75,11 @@ app.get('/', function(req, res, next) {
     return res.render('index', { login_link: login_url, login_text: 'Login', title: 'Hello, Generic User' });
 });
 
-/* GET home page. */
-app.get('/index.html', function(req, res, next) {
-    return res.redirect('/');
-});
-
-/* GET about page. */
 app.get('/about.html', function(req, res, next) {
     return res.render('about', { login_link: login_url, login_text: 'Login' });
 });
 
-/* GET contact page. */
+
 app.get('/contact.html', function(req, res, next) {
     return res.render('contact', { login_link: login_url, login_text: 'Login' });
 });
@@ -93,7 +95,7 @@ app.get('/test', function(req, res, next) {
     return res.json({netid: 'NO USER SESSION'});
 });
 
-/* GET canvas page. */
+
 app.get('/canvas.html', async function(req, res, next) {
     var flag = false;
     if(req.session.netid) {
@@ -110,6 +112,7 @@ app.get('/canvas.html', async function(req, res, next) {
         return res.render('index', { login_link: login_url, login_text: 'Login', title: 'Not logged in!' });
     }
 });
+*/
 
 /* GET logout. */
 app.get('/logout', function(req, res, next) {
