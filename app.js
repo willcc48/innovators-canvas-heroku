@@ -60,8 +60,8 @@ app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
-app.get('/home', function(req, res, next) {
-    return res.redirect('/');
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
 /*
