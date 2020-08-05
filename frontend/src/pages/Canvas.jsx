@@ -779,7 +779,7 @@ class Canvas extends Component {
     }
 
     constructDragDBArray(id) {
-        var dragArray;
+        var dragArray, secWidth, secHeight;
         switch(id) {
             case 'stress':
                 dragArray = [...this.state.stressDragObj.values()];
