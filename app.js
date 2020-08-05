@@ -60,12 +60,8 @@ app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/frontend/build/static/js/main.7dde50a7.chunk.js'));
-});
-
-app.get('/', function(req, res, next) {
-    return res.redirect('/home');
+app.get('/home', function(req, res, next) {
+    return res.redirect('/');
 });
 
 /*
