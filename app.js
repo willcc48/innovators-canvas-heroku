@@ -174,8 +174,6 @@ app.get('/userinfo', function(req, res, next) {
 
 /* POST canvas data. */
 app.post('/canvas_data', async function(req, res) {
-    res.send('hahah');
-    return;
     var userData = JSON.stringify(req.body);
     userData = JSON.parse(userData);
 
