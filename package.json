@@ -2,7 +2,10 @@
   "name": "innovators-canvas-backend",
   "version": "12.18.2",
   "private": true,
-  "engines": { "node": "12.18.2", "npm": "6.14.5"},
+  "engines": {
+    "node": "12.18.2",
+    "npm": "6.14.5"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "build": "cd frontend && npm run build",
@@ -25,7 +28,7 @@
     "fetch": "^1.1.0",
     "fotology": "^1.2.2",
     "helmet": "^3.23.3",
-    "http-errors": "~1.6.3",
+    "http-errors": "^1.6.3",
     "jquery": "^3.5.1",
     "jsdom": "^16.2.2",
     "jsonwebtoken": "^8.5.1",
