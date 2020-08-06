@@ -69,7 +69,7 @@ class Home extends Component {
         var login_hash = window.location.hash;
         if(login_hash) {
             var xhr = new window.XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:1234/', true);
+            xhr.open('POST', '/', true);
             xhr.withCredentials = true;
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             xhr.onreadystatechange = function () {
@@ -87,7 +87,6 @@ class Home extends Component {
                 }
             };
 
-            console.log('POSTING TO ROOT FOR HASH DATA');
             xhr.send(JSON.stringify(this.parseQueryString(login_hash.split('#')[1])));
         }
     }
