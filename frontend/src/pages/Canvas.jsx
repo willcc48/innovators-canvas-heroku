@@ -531,6 +531,7 @@ class Canvas extends Component {
 
         axios.get('https://innovators-canvas.herokuapp.com/userinfo', {withCredentials: true})
             .then(res => {
+                console.log('HAHAHAHAHAHAA');
                 var data = res.data;
                 if(data.netid) {
                     this.setState({loggedIn: true, canvasVisible: 'visible'})
