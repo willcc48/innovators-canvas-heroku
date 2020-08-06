@@ -529,7 +529,7 @@ class Canvas extends Component {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
 
-        axios.get('https://innovators-canvas.herokuapp.com/userinfo', {withCredentials: true})
+        axios.get('http://localhost:9000/userinfo', {withCredentials: true})
             .then(res => {
                 var data = res.data;
                 if(data.netid) {

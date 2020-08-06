@@ -69,7 +69,7 @@ class Home extends Component {
         var login_hash = window.location.hash;
         if(login_hash) {
             var xhr = new window.XMLHttpRequest();
-            xhr.open('POST', 'https://innovators-canvas.herokuapp.com/', true);
+            xhr.open('POST', 'http://localhost:9000/', true);
             xhr.withCredentials = true;
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             xhr.onreadystatechange = function () {
