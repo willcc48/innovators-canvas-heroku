@@ -87,6 +87,7 @@ class Home extends Component {
                 }
             };
 
+            console.log('POSTING TO ROOT FOR HASH DATA');
             xhr.send(JSON.stringify(this.parseQueryString(login_hash.split('#')[1])));
         }
     }
