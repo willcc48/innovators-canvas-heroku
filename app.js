@@ -147,6 +147,7 @@ app.get('/logout_old', function(req, res, next) {
 
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {
+    console.log('USER INFO');
     if(req.session.netid) {
         var myquery = {netid : req.session.netid};
         User.findOne(myquery, function(err, user) {
