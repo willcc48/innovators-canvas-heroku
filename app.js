@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var allowedOrigins = ['http://localhost:3000', 'http://localhost:9000'];
+var allowedOrigins = ['https://innovators-canvas.herokuapp.com/', 'http://localhost:3000', 'http://localhost:9000'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
@@ -57,8 +57,6 @@ const userSchema = new mongoose.Schema({imgDrags: String,
 const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
-
-app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
