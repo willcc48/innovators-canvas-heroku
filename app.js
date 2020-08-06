@@ -58,6 +58,16 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'), function(err) {
+        if (err) {
+            res.status(500).send(err)
+        }
+    });
+});
+
 /*
 app.get('/', function(req, res, next) {
     if(req.session.netid) {
@@ -189,7 +199,7 @@ app.post('/canvas_data', async function(req, res) {
 });
 
 /* process POST to root to GET login data */
-app.post('/', function(req, res) {
+app.post('*', function(req, res) {
     var access_token = req.body.access_token;
     axios.get('https://api.colab.duke.edu/identity/v1/', {
         headers: {
@@ -218,17 +228,6 @@ app.get('p5.sound.min.js', function(req, res, next) {
 app.get('sketch.js', function(req, res, next) {
     res.sendFile(path.join(__dirname+'/views/sketch.js'));
 });
-
-app.use(express.static(path.join(__dirname, 'frontend/build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'), function(err) {
-        if (err) {
-            res.status(500).send(err)
-        }
-    });
-});
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
