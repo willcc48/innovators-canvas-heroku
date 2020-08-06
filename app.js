@@ -24,11 +24,6 @@ const mongoose = require('mongoose');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.json());
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 var allowedOrigins = ['https://innovators-canvas.herokuapp.com/', 'http://localhost:3000', 'http://localhost:9000'];
@@ -45,6 +40,12 @@ app.use(cors({
     return callback(null, true);
   }, credentials: true
 }));
+
+app.use(bodyParser.json());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 mongoose.connect(process.env.ATLAS_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 mongoose.connection.once('open', () => {
