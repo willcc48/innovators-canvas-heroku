@@ -58,13 +58,6 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
-app.use(express.static(path.join(__dirname, 'frontend/build')));
-
-app.get('*', (req, res) => {
-    console.log(process.env.ATLAS_URI);
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
-});
-
 /*
 app.get('/', function(req, res, next) {
     if(req.session.netid) {
@@ -146,7 +139,7 @@ app.get('/logout_old', function(req, res, next) {
 });
 
 /* GET canvas data. */
-app.get('/api/userinfo', function(req, res, next) {
+app.get('/userinfo', function(req, res, next) {
     if(req.session.netid) {
         var myquery = {netid : req.session.netid};
         User.findOne(myquery, function(err, user) {
@@ -240,6 +233,13 @@ app.use(function(err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error');
+});
+
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+app.get('*', (req, res) => {
+    console.log(process.env.ATLAS_URI);
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
 module.exports = app;
