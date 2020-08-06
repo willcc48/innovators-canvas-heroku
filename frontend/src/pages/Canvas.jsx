@@ -744,7 +744,7 @@ class Canvas extends Component {
                         deliberate_practices: this.delibPracticesEditor.getData()};
     
         var xhr = new window.XMLHttpRequest();
-        xhr.open('POST', 'https://innovators-canvas.herokuapp.com/canvas_data', true);
+        xhr.open('POST', '/canvas_data', true);
         xhr.withCredentials = true;
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         xhr.onreadystatechange = function () {
@@ -1024,7 +1024,6 @@ class Canvas extends Component {
 
         for(var i=0; i<this.state.wizardImgUrlList.length; i++) {
             var map;
-            console.log(this.state.wizardMeanings);
             var imgObj = this.getImgDragComp(-1, this.state.searchDest, this.dragIndex, this.state.wizardImgUrlList[i], this.state.wizardMeanings[i]);
             switch(this.state.wizardDest) {
                 case 'Stress':
@@ -1629,7 +1628,6 @@ class Canvas extends Component {
                     </div>
                 </Grid>
             );
-            console.log(this.state.wizardMeanings);
 
             this.setState({wizardImgs: arr2, wizardImgIndex: this.state.wizardImgIndex+1});
             return;
@@ -1719,7 +1717,6 @@ class Canvas extends Component {
     }
 
     handleWizardMeaningText(index, e) {
-        console.log(index);
         var arr = this.state.wizardMeanings;
         arr[index] = e.target.value;
         this.setState({wizardMeanings: arr});
