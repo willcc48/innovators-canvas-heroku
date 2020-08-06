@@ -529,7 +529,7 @@ class Canvas extends Component {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
 
-        axios.get('http://localhost:9000/userinfo', {withCredentials: true})
+        axios.get('/userinfo', {withCredentials: true})
             .then(res => {
                 var data = res.data;
                 if(data.netid) {
