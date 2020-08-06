@@ -61,11 +61,8 @@ app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'), function(err) {
-        if (err) {
-            res.status(500).send(err)
-        }
-    });
+    console.log('CHECKPOINT!');
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
 /*
@@ -200,8 +197,6 @@ app.post('/canvas_data', async function(req, res) {
 
 /* process POST to root to GET login data */
 app.post('/', function(req, res) {
-    console.log('CHECKPOINT!');
-
     var access_token = req.body.access_token;
     axios.get('https://api.colab.duke.edu/identity/v1/', {
         headers: {
