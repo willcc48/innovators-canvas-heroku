@@ -529,7 +529,7 @@ class Canvas extends Component {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
 
-        axios.get('http://localhost:9000/userinfo', {withCredentials: true})
+        axios.get('https://innovators-canvas.herokuapp.com/userinfo', {withCredentials: true})
             .then(res => {
                 var data = res.data;
                 if(data.netid) {
@@ -744,7 +744,7 @@ class Canvas extends Component {
                         deliberate_practices: this.delibPracticesEditor.getData()};
     
         var xhr = new window.XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:9000/canvas_data', true);
+        xhr.open('POST', 'https://innovators-canvas.herokuapp.com/canvas_data', true);
         xhr.withCredentials = true;
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         xhr.onreadystatechange = function () {
