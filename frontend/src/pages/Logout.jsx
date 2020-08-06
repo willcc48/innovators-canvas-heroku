@@ -17,7 +17,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:9000/logout', {withCredentials: true})
+        axios.get('https://innovators-canvas.herokuapp.com/logout', {withCredentials: true})
             .then(res => {
                 if(res.data === 'done') {
                     this.setState({logoutSuccess: true});
