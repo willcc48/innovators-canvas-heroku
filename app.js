@@ -29,7 +29,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 var allowedOrigins = ['https://innovators-canvas.herokuapp.com/', 'http://localhost:3000', 'http://localhost:9000'];
 app.use(cors({
@@ -61,7 +61,6 @@ app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.get('*', (req, res) => {
-    console.log('CHECKPOINT!');
     res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
@@ -147,7 +146,6 @@ app.get('/logout_old', function(req, res, next) {
 
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {
-    console.log('USER INFO');
     if(req.session.netid) {
         var myquery = {netid : req.session.netid};
         User.findOne(myquery, function(err, user) {
@@ -198,7 +196,6 @@ app.post('/canvas_data', async function(req, res) {
 
 /* process POST to root to GET login data */
 app.post('/', function(req, res) {
-    console.log('POSTED!');
     var access_token = req.body.access_token;
     axios.get('https://api.colab.duke.edu/identity/v1/', {
         headers: {
