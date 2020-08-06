@@ -54,7 +54,6 @@ class Home extends Component {
         this.sendLoginHash();
         axios.get('https://innovators-canvas.herokuapp.com/userinfo', {withCredentials: true})
             .then(res => {
-                console.log('AHAHAHAHAA');
                 var data = res.data;
                 if(data.netid) {
                     this.setState({firstName: data.firstName, lastName: data.lastName, netid: data.netid, problem: data.problem});
