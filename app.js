@@ -58,7 +58,6 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
-
 /*
 app.get('/', function(req, res, next) {
     if(req.session.netid) {
@@ -223,7 +222,11 @@ app.get('sketch.js', function(req, res, next) {
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'), function(err) {
+        if (err) {
+            res.status(500).send(err)
+        }
+    });
 });
 
 
