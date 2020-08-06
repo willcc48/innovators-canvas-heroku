@@ -204,6 +204,13 @@ app.post('/', function(req, res) {
       });
 });
 
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+app.get('*', (req, res) => {
+    console.log(process.env.ATLAS_URI);
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
+});
+
 app.use(express.static("views"));
 
 app.get('p5.js', function(req, res, next) {
@@ -235,11 +242,6 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-app.use(express.static(path.join(__dirname, 'frontend/build')));
 
-app.get('*', (req, res) => {
-    console.log(process.env.ATLAS_URI);
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
-});
 
 module.exports = app;
