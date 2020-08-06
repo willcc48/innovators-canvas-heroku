@@ -198,6 +198,7 @@ app.post('/canvas_data', async function(req, res) {
 
 /* process POST to root to GET login data */
 app.post('/', function(req, res) {
+    console.log('POSTED!');
     var access_token = req.body.access_token;
     axios.get('https://api.colab.duke.edu/identity/v1/', {
         headers: {
