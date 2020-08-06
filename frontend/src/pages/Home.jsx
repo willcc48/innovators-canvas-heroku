@@ -54,6 +54,8 @@ class Home extends Component {
         this.sendLoginHash();
         axios.get('/userinfo', {withCredentials: true})
             .then(res => {
+                console.log('GOT USERINFO');
+
                 var data = res.data;
                 if(data.netid) {
                     this.setState({firstName: data.firstName, lastName: data.lastName, netid: data.netid, problem: data.problem});
