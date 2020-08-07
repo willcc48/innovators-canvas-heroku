@@ -14,17 +14,8 @@ var open = require('open');
 var cors = require('cors');
 require('dotenv').config();
 
-var login_url = 'https://oauth.oit.duke.edu/oauth/authorize.php?response_type=token&redirect_uri=https%3A%2F%2Finnovators-canvas.herokuapp.com%2F&client_id=innovators-canvas&scope=basic&state=1129&client_secret=2nA!QE=qgr73rUlKgvkjX!k4foCg!W#4KP*co4tSVgYVxHz*qd';
-var logout_url = 'https://oauth.oit.duke.edu/Shibboleth.sso/Logout?return=https://shib.oit.duke.edu/cgi-bin/logout.pl';
-
 var app = express();
 const mongoose = require('mongoose');
-
-// view engine setup
-/*
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-*/
 
 app.use(cors());
 
@@ -46,61 +37,11 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
-
 app.post('/testpost', function(req, res) {
     var a = req.body.a;
     console.log('THIS WAS THE POST DATA: ' + a);
     res.send('done');
 });
-
-
-/*
-app.get('/', function(req, res, next) {
-    if(req.session.netid) {
-        return res.render('index', { login_link: './logout_old',
-            login_text: 'Logout', title: 'Hi logged in user!' });
-    }
-    return res.render('index', { login_link: login_url, login_text: 'Login', title: 'Hello, Generic User' });
-});
-
-app.get('/about.html', function(req, res, next) {
-    return res.render('about', { login_link: login_url, login_text: 'Login' });
-});
-
-
-app.get('/contact.html', function(req, res, next) {
-    return res.render('contact', { login_link: login_url, login_text: 'Login' });
-});
-
-app.get('/test', function(req, res, next) {
-    if(req.session.netid) {
-        return res.json({
-            netid: req.session.netid,
-            firstName: req.session.firstName,
-            lastName: req.session.lastName
-        });
-    }
-    return res.json({netid: 'NO USER SESSION'});
-});
-
-
-app.get('/canvas.html', async function(req, res, next) {
-    var flag = false;
-    if(req.session.netid) {
-        flag = true;
-        var myquery = {"netid" : req.session.netid};
-        const user = await User.findOne(myquery);
-
-        return res.render('./canvas', { login_link: './logout_old',
-            login_text: 'Logout', title: 'Hi '+user.firstName
-            +' '+user.lastName+' '+user.netid+'', problem: user.problem });
-    }
-
-    if(!flag) {
-        return res.render('index', { login_link: login_url, login_text: 'Login', title: 'Not logged in!' });
-    }
-});
-*/
 
 /* GET logout. */
 app.get('/logout', function(req, res, next) {
@@ -109,32 +50,11 @@ app.get('/logout', function(req, res, next) {
             if(err) {
                 return console.log(err);
             }
-            open(logout_url, function (err) {
-                if ( err ) throw err;    
-            });
         });
         return res.send('done');
     }
     return res.send();
 });
-
-/* GET logout. */
-/*
-app.get('/logout_old', function(req, res, next) {
-    if(req.session.netid) {
-        req.session.destroy((err) => {
-            if(err) {
-                return console.log(err);
-            }
-            open(logout_url, function (err) {
-                if ( err ) throw err;    
-            });
-        });
-        return res.redirect('/');
-    }
-    return res.render('index', { login_link: login_url, login_text: 'Login', title: 'Not logged in!' });
-});
-*/
 
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {

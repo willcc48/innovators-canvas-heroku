@@ -21,6 +21,7 @@ class Login extends Component {
             .then(res => {
                 if(res.data === 'done') {
                     this.setState({logoutSuccess: true});
+                    window.open('https://oauth.oit.duke.edu/Shibboleth.sso/Logout?return=https://shib.oit.duke.edu/cgi-bin/logout.pl');
                 } else {
                     console.log(res);
                     this.setState({logoutSuccess: false});
