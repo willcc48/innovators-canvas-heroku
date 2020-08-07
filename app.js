@@ -59,12 +59,6 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
-app.post('/asdf', function(req, res) {
-    var email = req.body.email;
-    console.log('THE EMAIL IS ' + email);
-    res.send('done');
-});
-
 /*
 app.get('/', function(req, res, next) {
     if(req.session.netid) {

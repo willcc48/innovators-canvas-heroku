@@ -51,26 +51,6 @@ class Home extends Component {
         this.divRef.current.appendChild(script3);
 */
 
-        var xhr = new window.XMLHttpRequest();
-        xhr.open('POST', '/asdf', true);
-        xhr.withCredentials = true;
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        xhr.onreadystatechange = function () {
-            // In local files, status is 0 upon success in Mozilla Firefox
-            if(xhr.readyState === XMLHttpRequest.DONE) {
-                var status = xhr.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                    // The request has been completed successfully
-                    console.log('POST COMPLETED WOOOOHOOOOOOO '+status);
-                } else {
-                    // Oh no! There has been an error with the request!
-                    console.log('request failed '+status);
-                }
-            }
-        };
-
-        xhr.send(JSON.stringify({ "email": "hello@user.com", "response": { "name": "Tester" } }));
-
         this.sendLoginHash();
         axios.get('/userinfo', {withCredentials: true})
             .then(res => {
