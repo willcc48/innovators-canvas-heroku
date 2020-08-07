@@ -59,7 +59,7 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
-/*
+
 app.get('/', function(req, res, next) {
     if(req.session.netid) {
         return res.render('index', { login_link: './logout_old',
@@ -105,7 +105,7 @@ app.get('/canvas.html', async function(req, res, next) {
         return res.render('index', { login_link: login_url, login_text: 'Login', title: 'Not logged in!' });
     }
 });
-*/
+
 
 /* GET logout. */
 app.get('/logout', function(req, res, next) {
