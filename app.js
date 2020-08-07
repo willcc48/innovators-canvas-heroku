@@ -205,6 +205,7 @@ app.post('/', function(req, res) {
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.get('*', (req, res) => {
+    console.log(__dirname);
     res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
