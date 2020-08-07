@@ -21,10 +21,10 @@ var app = express();
 const mongoose = require('mongoose');
 
 // view engine setup
+/*
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-//app.use(express.static(path.join(__dirname, 'public')));
+*/
 
 var allowedOrigins = ['https://innovators-canvas.herokuapp.com/', 'http://localhost:3000', 'http://localhost:9000'];
 app.use(cors({
@@ -59,11 +59,13 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
+/*
 app.post('/testpost', function(req, res) {
     var a = req.body.a;
     console.log('THIS WAS THE POST DATA: ' + a);
     res.send('done');
 });
+*/
 
 /*
 app.get('/', function(req, res, next) {
@@ -130,6 +132,7 @@ app.get('/logout', function(req, res, next) {
 });
 
 /* GET logout. */
+/*
 app.get('/logout_old', function(req, res, next) {
     if(req.session.netid) {
         req.session.destroy((err) => {
@@ -144,6 +147,7 @@ app.get('/logout_old', function(req, res, next) {
     }
     return res.render('index', { login_link: login_url, login_text: 'Login', title: 'Not logged in!' });
 });
+*/
 
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {
@@ -214,10 +218,10 @@ app.post('/', function(req, res) {
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.get('*', (req, res) => {
-    console.log(process.env.ATLAS_URI);
     res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
+/*
 app.use(express.static("views"));
 
 app.get('p5.js', function(req, res, next) {
@@ -232,6 +236,7 @@ app.get('p5.sound.min.js', function(req, res, next) {
 app.get('sketch.js', function(req, res, next) {
     res.sendFile(path.join(__dirname+'/views/sketch.js'));
 });
+*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -248,7 +253,5 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
-
 
 module.exports = app;
