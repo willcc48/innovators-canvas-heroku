@@ -51,6 +51,11 @@ class Home extends Component {
         this.divRef.current.appendChild(script3);
 */
 
+        axios.post('/testpost', { a: 'Test variable 1' }, { withCredentials: true })
+            .then(res => {
+                console.log(res);
+            });
+
         this.sendLoginHash();
         axios.get('/userinfo', {withCredentials: true})
             .then(res => {

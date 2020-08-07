@@ -59,6 +59,12 @@ const User = mongoose.model('User', userSchema);
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'XCR3rsasa%RDHHH', cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}}));
 
+app.post('/testpost', function(req, res) {
+    var a = req.body.a;
+    console.log('THIS WAS THE POST DATA: ' + a);
+    res.send('done');
+});
+
 /*
 app.get('/', function(req, res, next) {
     if(req.session.netid) {
