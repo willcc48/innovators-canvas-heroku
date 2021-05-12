@@ -21,7 +21,6 @@ class Login extends Component {
             .then(res => {
                 if(res.data === 'done') {
                     this.setState({logoutSuccess: true});
-                    window.open('https://oauth.oit.duke.edu/Shibboleth.sso/Logout?return=https://shib.oit.duke.edu/cgi-bin/logout.pl');
                 } else {
                     console.log(res);
                     this.setState({logoutSuccess: false});
@@ -35,7 +34,7 @@ class Login extends Component {
                 <div>
                     <MaterialNavBar loggedIn={!this.state.logoutSuccess} title='Logout'/>
                     <br/><br/><br/><br/><br/>
-                    <div>You will be redirected to logout.</div>
+                    <div>You are logged out of Guest.</div>
                 </div>
             )
         } else {

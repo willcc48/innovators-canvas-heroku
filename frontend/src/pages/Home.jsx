@@ -50,7 +50,7 @@ class Home extends Component {
         this.divRef.current.appendChild(script2);
         this.divRef.current.appendChild(script3);
 */
-
+        console.log("made it to home")
         axios.post('/testpost', { a: 'Test variable 1' }, { withCredentials: true })
             .then(res => {
                 console.log(res);
@@ -74,6 +74,7 @@ class Home extends Component {
 
     sendLoginHash() {
         var login_hash = window.location.hash;
+        console.log(login_hash)
         if(login_hash) {
             var xhr = new window.XMLHttpRequest();
             xhr.open('POST', '/', true);
