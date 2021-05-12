@@ -115,17 +115,19 @@ app.post('/', function(req, res) {
         req.session.netid = 'Guest';
         res.send('done');
     }
-    axios.get('https://api.colab.duke.edu/identity/v1/', {
-        headers: {
-            'x-api-key': 'innovators-canvas',
-            'Authorization': `Bearer ${access_token}`
-        }
-    }).then((response) => {
-        req.session.firstName = response.data.firstName;
-        req.session.lastName = response.data.lastName;
-        req.session.netid = response.data.netid;
-        res.send('done');
-      });
+    else {
+        axios.get('https://api.colab.duke.edu/identity/v1/', {
+            headers: {
+                'x-api-key': 'innovators-canvas',
+                'Authorization': `Bearer ${access_token}`
+            }
+        }).then((response) => {
+            req.session.firstName = response.data.firstName;
+            req.session.lastName = response.data.lastName;
+            req.session.netid = response.data.netid;
+            res.send('done');
+          });
+    }
 });
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));
