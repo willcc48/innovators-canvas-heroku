@@ -528,6 +528,7 @@ class Canvas extends Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+        console.log('Reading user');
 
         axios.get('/userinfo', {withCredentials: true})
             .then(res => {
@@ -541,6 +542,7 @@ class Canvas extends Component {
                     var imgDrags = JSON.parse(data.imgDrags);
                     this.reconstructDbDrags(imgDrags);
                 } else {
+                    console.log('Couldnt read user');
                     this.setState({loggedIn: false})
                 }
         });
@@ -2009,6 +2011,7 @@ class Canvas extends Component {
                 <Card variant="outlined"   direction="column" alignItems="center" justify="center" style={{maxWidth: 200}}>
                     <CardContent>
                         <Button component={ Link } to='/login' variant="outlined" color="primary">NetID Login</Button>
+                        <Button component={ Link } to='/guest_login' variant="outlined" color="primary">Guest Login</Button>
                         <Typography style={{marginTop: 15}} variant='body2'>Login to access your canvas.</Typography>
                     </CardContent>
                 </Card>
@@ -2584,12 +2587,14 @@ class Canvas extends Component {
 
                     <MenuProvider id='vision_context' >
                         <this.visionContext />
-                        <div className={this.state.VisionMobileClass} onClick={() => this.showWizard('vision')}>
+                        <div className={this.state.visionMobileClass} onClick={() => this.showWizard('vision')}>
                             {this.getTextCard(this.state.vision, 'vision')}        
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.visionDragObj.values()].map((img, index) => [...this.state.visionDragObj.values()][index].visible &&  <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.visionDragObj.values()].map((img, index) => [...this.state.visionDragObj.values()][index].visible &&  <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='stress_context' >
@@ -2599,7 +2604,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.stressDragObj.values()].map((img, index) => [...this.state.stressDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.stressDragObj.values()].map((img, index) => [...this.state.stressDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='behaviors_context' >
@@ -2609,7 +2616,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.behaviorsDragObj.values()].map((img, index) => [...this.state.behaviorsDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.behaviorsDragObj.values()].map((img, index) => [...this.state.behaviorsDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='experience_bias_context' >
@@ -2619,7 +2628,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.expBiasDragObj.values()].map((img, index) => [...this.state.expBiasDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.expBiasDragObj.values()].map((img, index) => [...this.state.expBiasDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='deliberate_practices_context' >
@@ -2629,7 +2640,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.delibPracticesDragObj.values()].map((img, index) => [...this.state.delibPracticesDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.delibPracticesDragObj.values()].map((img, index) => [...this.state.delibPracticesDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='purpose_context' >
@@ -2639,7 +2652,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.purposeDragObj.values()].map((img, index) => [...this.state.purposeDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.purposeDragObj.values()].map((img, index) => [...this.state.purposeDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='voice_context' >
@@ -2649,7 +2664,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.voiceDragObj.values()].map((img, index) => [...this.state.voiceDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.voiceDragObj.values()].map((img, index) => [...this.state.voiceDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='strengths_context' >
@@ -2659,7 +2676,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.strengthsDragObj.values()].map((img, index) => [...this.state.strengthsDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.strengthsDragObj.values()].map((img, index) => [...this.state.strengthsDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='energy_context' >
@@ -2669,7 +2688,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.energyDragObj.values()].map((img, index) => [...this.state.energyDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.energyDragObj.values()].map((img, index) => [...this.state.energyDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='fixed_mindset_context' >
@@ -2679,7 +2700,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.fixedMindsetDragObj.values()].map((img, index) => [...this.state.fixedMindsetDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.fixedMindsetDragObj.values()].map((img, index) => [...this.state.fixedMindsetDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='values_context' >
@@ -2689,7 +2712,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.valuesDragObj.values()].map((img, index) => [...this.state.valuesDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.valuesDragObj.values()].map((img, index) => [...this.state.valuesDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <MenuProvider id='growth_mindset_context' >
@@ -2699,7 +2724,9 @@ class Canvas extends Component {
                         </div>
                     </MenuProvider>
 
-                    { [...this.state.growthMindsetDragObj.values()].map((img, index) => [...this.state.growthMindsetDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    <div>
+                        { [...this.state.growthMindsetDragObj.values()].map((img, index) => [...this.state.growthMindsetDragObj.values()][index].visible && <Fragment key={index}>{img.dragComp}</Fragment>) }
+                    </div>
                     <br/>
 
                     <br/>
