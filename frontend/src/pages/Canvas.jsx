@@ -738,6 +738,10 @@ class Canvas extends Component {
     }
   
     updateInfo() {
+        if(this.state.netid === 'Guest') {
+            return;
+        }
+
         this.setloaderVisibility('visible');
 
         var dbDrags = JSON.stringify(this.getDragsForDB());

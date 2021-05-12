@@ -109,7 +109,7 @@ app.post('/canvas_data', async function(req, res) {
 /* process POST to root to GET login data */
 app.post('/', function(req, res) {
     var access_token = req.body.access_token;
-    if(access_token === 'access_token=guest') {
+    if(access_token === 'guest') {
         req.session.firstName = '';
         req.session.lastName = '';
         req.session.netid = 'Guest';
