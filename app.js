@@ -58,7 +58,7 @@ app.get('/logout', function(req, res, next) {
 
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {
-    if(req.session.netid) {
+    if(req.session.netid && req.session.netid !== 'Guest') {
         var myquery = {netid : req.session.netid};
         User.findOne(myquery, function(err, user) {
             if(user==null) {
@@ -109,6 +109,12 @@ app.post('/canvas_data', async function(req, res) {
 /* process POST to root to GET login data */
 app.post('/', function(req, res) {
     var access_token = req.body.access_token;
+    if(access_token === 'access_token=guest') {
+        req.session.firstName = '';
+        req.session.lastName = '';
+        req.session.netid = 'Guest';
+        res.send('done');
+    }
     axios.get('https://api.colab.duke.edu/identity/v1/', {
         headers: {
             'x-api-key': 'innovators-canvas',

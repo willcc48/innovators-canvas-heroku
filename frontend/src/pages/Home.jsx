@@ -61,7 +61,7 @@ class Home extends Component {
             .then(res => {
                 var data = res.data;
                 if(data.netid) {
-                    this.setState({firstName: data.firstName, lastName: data.lastName, netid: data.netid, problem: data.problem});
+                    this.setState({firstName: data.firstName, lastName: data.lastName, problem: data.problem});
                     this.setState({loggedIn: true})
                 } else {
                     this.setState({loggedIn: false})
@@ -92,6 +92,8 @@ class Home extends Component {
                 }
             };
 
+            console.log('This is the hash sent');
+            console.log(JSON.stringify(this.parseQueryString(login_hash.split('#')[1])));
             xhr.send(JSON.stringify(this.parseQueryString(login_hash.split('#')[1])));
         }
     }
