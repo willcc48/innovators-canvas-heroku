@@ -91,7 +91,7 @@ app.get('/userinfo', function(req, res, next) {
 });
 
 /* POST canvas data. */
-app.post('localhost:9000/canvas_data', async function(req, res) {
+app.post('/canvas_data', async function(req, res) {
     var userData = JSON.stringify(req.body);
     userData = JSON.parse(userData);
 
