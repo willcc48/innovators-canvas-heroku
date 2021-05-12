@@ -61,12 +61,17 @@ app.get('/userinfo', function(req, res, next) {
     if(req.session.netid) {
         if(req.session.netid === 'Guest') {
             if(req.session.guest == null) {
-                req.session.guest = new User({
+                var guest = new User({
                     imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
                     stress: '<h3>Stress</h3>', strengths: '<h3>Strengths</h3>', behaviors: '<h3>Behaviors</h3>', energy: '<h3>Energy</h3>',
                     experience_bias: '<h3>Experience Bias</h3>', voice: '<h3>Voice</h3>', values: '<h3>Values</h3>', fixed_mindset: '<h3>Fixed Mindset</h3>',
                     growth_mindset: '<h3>Growth Mindset</h3>', vision: '<h3>Vision</h3>', purpose: '<h3>Purpose</h3>',
                     deliberate_practices: '<h3>Deliberate Practices</h3>'});
+                req.session.guest = guest;
+                return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
+                    behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
+                    values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
+                    purpose: user.purpose, deliberate_practices: user.deliberate_practices });
             } else {
                 var user = req.session.guest;
                 return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
