@@ -58,32 +58,49 @@ app.get('/logout', function(req, res, next) {
 
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {
-    if(req.session.netid && req.session.netid !== 'Guest') {
-        var myquery = {netid : req.session.netid};
-        User.findOne(myquery, function(err, user) {
-            if(user==null) {
-                var my_user = new User({
-                    imgDrags: '[]', netid: req.session.netid, firstName: req.session.firstName, lastName: req.session.lastName,
+    if(req.session.netid) {
+        if(req.session.netid === 'Guest') {
+            if(req.session.guest == null) {
+                req.session.guest = new User({
+                    imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
                     stress: '<h3>Stress</h3>', strengths: '<h3>Strengths</h3>', behaviors: '<h3>Behaviors</h3>', energy: '<h3>Energy</h3>',
                     experience_bias: '<h3>Experience Bias</h3>', voice: '<h3>Voice</h3>', values: '<h3>Values</h3>', fixed_mindset: '<h3>Fixed Mindset</h3>',
                     growth_mindset: '<h3>Growth Mindset</h3>', vision: '<h3>Vision</h3>', purpose: '<h3>Purpose</h3>',
                     deliberate_practices: '<h3>Deliberate Practices</h3>'});
-    
-                my_user.save(function(err,result) {
-                    User.findOne(myquery, function(err, user) {
-                        return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
-                            behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
-                            values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
-                            purpose: user.purpose, deliberate_practices: user.deliberate_practices });
-                    });
-                })
             } else {
+                var user = req.session.guest;
                 return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
                     behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
                     values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
                     purpose: user.purpose, deliberate_practices: user.deliberate_practices });
             }
-        })
+        } else {
+            var myquery = {netid : req.session.netid};
+            User.findOne(myquery, function(err, user) {
+                if(user==null) {
+                    var my_user = new User({
+                        imgDrags: '[]', netid: req.session.netid, firstName: req.session.firstName, lastName: req.session.lastName,
+                        stress: '<h3>Stress</h3>', strengths: '<h3>Strengths</h3>', behaviors: '<h3>Behaviors</h3>', energy: '<h3>Energy</h3>',
+                        experience_bias: '<h3>Experience Bias</h3>', voice: '<h3>Voice</h3>', values: '<h3>Values</h3>', fixed_mindset: '<h3>Fixed Mindset</h3>',
+                        growth_mindset: '<h3>Growth Mindset</h3>', vision: '<h3>Vision</h3>', purpose: '<h3>Purpose</h3>',
+                        deliberate_practices: '<h3>Deliberate Practices</h3>'});
+        
+                    my_user.save(function(err,result) {
+                        User.findOne(myquery, function(err, user) {
+                            return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
+                                behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
+                                values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
+                                purpose: user.purpose, deliberate_practices: user.deliberate_practices });
+                        });
+                    })
+                } else {
+                    return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
+                        behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
+                        values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
+                        purpose: user.purpose, deliberate_practices: user.deliberate_practices });
+                }
+            })
+        }
     }
     else{
         return res.json({});
@@ -94,15 +111,25 @@ app.get('/userinfo', function(req, res, next) {
 app.post('/canvas_data', async function(req, res) {
     var userData = JSON.stringify(req.body);
     userData = JSON.parse(userData);
-
     var saved_res = res;
-    var myquery = { netid: req.session.netid };
-    var newvalues = { $set: {imgDrags: userData['imgDrags'], stress: userData['stress'], strengths: userData['strengths'], behaviors: userData['behaviors'], energy: userData['energy'],
-                             experience_bias: userData['experience_bias'], voice: userData['voice'], values: userData['values'], 
-                             fixed_mindset: userData['fixed_mindset'], growth_mindset: userData['growth_mindset'], vision: userData['vision'],
-                             purpose: userData['purpose'], deliberate_practices: userData['deliberate_practices']}};
 
-    await User.findOneAndUpdate(myquery, newvalues, {useFindAndModify: false});
+    if(req.session.netid === 'Guest') {
+        req.session.user = new User({
+            imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
+            stress: userData['stress'], strengths: userData['strengths'], behaviors: userData['behaviors'], energy: userData['energy'],
+            experience_bias: userData['experience_bias'], voice: userData['voice'], values: userData['values'], 
+            fixed_mindset: userData['fixed_mindset'], growth_mindset: userData['growth_mindset'], vision: userData['vision'],
+            purpose: userData['purpose'], deliberate_practices: userData['deliberate_practices']});
+    } else {
+        var myquery = { netid: req.session.netid };
+        var newvalues = { $set: {imgDrags: userData['imgDrags'], stress: userData['stress'], strengths: userData['strengths'], behaviors: userData['behaviors'], energy: userData['energy'],
+                                 experience_bias: userData['experience_bias'], voice: userData['voice'], values: userData['values'], 
+                                 fixed_mindset: userData['fixed_mindset'], growth_mindset: userData['growth_mindset'], vision: userData['vision'],
+                                 purpose: userData['purpose'], deliberate_practices: userData['deliberate_practices']}};
+    
+        await User.findOneAndUpdate(myquery, newvalues, {useFindAndModify: false});
+    }
+
     return saved_res.end();
 });
 
@@ -110,8 +137,6 @@ app.post('/canvas_data', async function(req, res) {
 app.post('/', function(req, res) {
     var access_token = req.body.access_token;
     if(access_token === 'guest') {
-        req.session.firstName = '';
-        req.session.lastName = '';
         req.session.netid = 'Guest';
         res.send('done');
     }
