@@ -61,6 +61,8 @@ class Home extends Component {
             .then(res => {
                 var data = res.data;
                 if(data.netid) {
+                    console.log('names')
+                    console.log(data.firstName)
                     this.setState({firstName: data.firstName, lastName: data.lastName, problem: data.problem});
                     this.setState({loggedIn: true})
                 } else {

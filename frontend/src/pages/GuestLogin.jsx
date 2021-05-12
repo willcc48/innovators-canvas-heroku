@@ -15,7 +15,7 @@ class GuestLogin extends Component {
 
     componentDidMount() {
         console.log('mounted guest login')
-        window.location = "https://https://innovators-canvas.herokuapp.com/#guest";
+        window.location = "https://https://innovators-canvas.herokuapp.com/home#guest";
     }
 
     
