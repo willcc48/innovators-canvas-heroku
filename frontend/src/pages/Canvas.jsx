@@ -758,12 +758,14 @@ class Canvas extends Component {
                 var status = xhr.status;
                 if (status === 0 || (status >= 200 && status < 400)) {
                     this.setloaderVisibility('hidden');
+                    console.log('updated info')
                 } else {
                     console.log('request failed '+status);
                 }
             }
         }.bind(this);
 
+        console.log(JSON.stringify(userData));
         xhr.send(JSON.stringify(userData));
     }
 

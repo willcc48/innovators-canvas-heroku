@@ -61,7 +61,7 @@ app.get('/userinfo', function(req, res, next) {
     if(req.session.netid) {
         if(req.session.netid === 'Guest') {
             if(req.session.guest == null) {
-                var guest = new User({
+                var user = new User({
                     imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
                     stress: '<h3>Stress</h3>', strengths: '<h3>Strengths</h3>', behaviors: '<h3>Behaviors</h3>', energy: '<h3>Energy</h3>',
                     experience_bias: '<h3>Experience Bias</h3>', voice: '<h3>Voice</h3>', values: '<h3>Values</h3>', fixed_mindset: '<h3>Fixed Mindset</h3>',
@@ -120,7 +120,7 @@ app.post('/canvas_data', async function(req, res) {
 
     if(req.session.netid === 'Guest') {
         req.session.user = new User({
-            imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
+            imgDrags: userData['imgDrags'], netid: req.session.netid, firstName: req.session.firstName, lastName: req.session.lastName,
             stress: userData['stress'], strengths: userData['strengths'], behaviors: userData['behaviors'], energy: userData['energy'],
             experience_bias: userData['experience_bias'], voice: userData['voice'], values: userData['values'], 
             fixed_mindset: userData['fixed_mindset'], growth_mindset: userData['growth_mindset'], vision: userData['vision'],
