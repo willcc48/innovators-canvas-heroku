@@ -533,7 +533,10 @@ class Canvas extends Component {
         axios.get('/userinfo', {withCredentials: true})
             .then(res => {
                 var data = res.data;
+                console.log('user read');
                 if(data.netid) {
+                    console.log(data.netid);
+                    console.log(data)
                     this.setState({loggedIn: true, canvasVisible: 'visible'})
                     this.setState({firstName: data.firstName, lastName: data.lastName, netid: data.netid, stress: data.stress,
                                    strengths: data.strengths, behaviors: data.behaviors, energy: data.energy, experience_bias: data.experience_bias,
