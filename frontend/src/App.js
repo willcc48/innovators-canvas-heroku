@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Logout from './pages/Logout.jsx'
 import GuestLogin from './pages/GuestLogin'
+import GuestLogout from './pages/GuestLogout'
 import './App.css';
 import React, { Component } from "react";
 
