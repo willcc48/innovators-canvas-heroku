@@ -149,6 +149,12 @@ app.post('/', function(req, res) {
     var access_token = req.body.access_token;
     if(access_token === 'guest') {
         req.session.netid = 'Guest';
+        req.session.guest = new User({
+            imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
+            stress: '<h3>Stress</h3>', strengths: '<h3>Strengths</h3>', behaviors: '<h3>Behaviors</h3>', energy: '<h3>Energy</h3>',
+            experience_bias: '<h3>Experience Bias</h3>', voice: '<h3>Voice</h3>', values: '<h3>Values</h3>', fixed_mindset: '<h3>Fixed Mindset</h3>',
+            growth_mindset: '<h3>Growth Mindset</h3>', vision: '<h3>Vision</h3>', purpose: '<h3>Purpose</h3>',
+            deliberate_practices: '<h3>Deliberate Practices</h3>'});
         res.send('done');
     }
     else {
