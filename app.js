@@ -64,10 +64,7 @@ app.get('/userinfo', function(req, res, next) {
         if(req.session.netid === 'Guest') {
             console.log('netid is GUEST');
             var user = req.session.guest;
-            console.log(res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
-                behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
-                values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
-                purpose: user.purpose, deliberate_practices: user.deliberate_practices }))
+            console.log(user);
             return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
                 behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
                 values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,

@@ -546,7 +546,7 @@ class Canvas extends Component {
                     var imgDrags = JSON.parse(data.imgDrags);
                     this.reconstructDbDrags(imgDrags);
                 } else {
-                    console.log('Couldnt read user');
+                    console.log('no data received');
                     this.setState({loggedIn: false})
                 }
         });

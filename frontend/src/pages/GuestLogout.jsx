@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import MaterialNavBar from '../components/MaterialNavBar';
 
-class Login extends Component {
+class GuestLogout extends Component {
 
     constructor(props) {
         super(props);
@@ -59,4 +59,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default GuestLogout
