@@ -20,6 +20,7 @@ class Login extends Component {
         axios.get('/logout', {withCredentials: true})
             .then(res => {
                 if(res.data === 'done') {
+                    console.log(res);
                     this.setState({logoutSuccess: true});
                 } else {
                     console.log(res);

@@ -58,9 +58,13 @@ app.get('/logout', function(req, res, next) {
 
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {
+    console.log('at /userinfo');
     if(req.session.netid) {
+        console.log('netid found');
         if(req.session.netid === 'Guest') {
+            console.log('netid is GUEST');
             if(req.session.guest == null) {
+                console.log('guest null')
                 var user = new User({
                     imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
                     stress: '<h3>Stress</h3>', strengths: '<h3>Strengths</h3>', behaviors: '<h3>Behaviors</h3>', energy: '<h3>Energy</h3>',
@@ -73,6 +77,7 @@ app.get('/userinfo', function(req, res, next) {
                     values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
                     purpose: user.purpose, deliberate_practices: user.deliberate_practices });
             } else {
+                console.log('guest not null');
                 var user = req.session.guest;
                 return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
                     behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
@@ -119,6 +124,7 @@ app.post('/canvas_data', async function(req, res) {
     var saved_res = res;
 
     if(req.session.netid === 'Guest') {
+        console.log('saving canvas data')
         req.session.user = new User({
             imgDrags: userData['imgDrags'], netid: req.session.netid, firstName: req.session.firstName, lastName: req.session.lastName,
             stress: userData['stress'], strengths: userData['strengths'], behaviors: userData['behaviors'], energy: userData['energy'],
