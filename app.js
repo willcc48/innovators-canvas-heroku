@@ -59,6 +59,8 @@ app.get('/logout', function(req, res, next) {
 /* GET canvas data. */
 app.get('/userinfo', function(req, res, next) {
     console.log('at /userinfo');
+    console.log(req.session.netid);
+    console.log(req.session.guest);
     if(req.session.netid) {
         console.log('netid found');
         if(req.session.netid === 'Guest') {
