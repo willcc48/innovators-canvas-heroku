@@ -63,27 +63,15 @@ app.get('/userinfo', function(req, res, next) {
         console.log('netid found');
         if(req.session.netid === 'Guest') {
             console.log('netid is GUEST');
-            if(req.session.guest == null) {
-                console.log('guest null')
-                var user = new User({
-                    imgDrags: '[]', netid: req.session.netid, firstName: '', lastName: '',
-                    stress: '<h3>Stress</h3>', strengths: '<h3>Strengths</h3>', behaviors: '<h3>Behaviors</h3>', energy: '<h3>Energy</h3>',
-                    experience_bias: '<h3>Experience Bias</h3>', voice: '<h3>Voice</h3>', values: '<h3>Values</h3>', fixed_mindset: '<h3>Fixed Mindset</h3>',
-                    growth_mindset: '<h3>Growth Mindset</h3>', vision: '<h3>Vision</h3>', purpose: '<h3>Purpose</h3>',
-                    deliberate_practices: '<h3>Deliberate Practices</h3>'});
-                req.session.guest = guest;
-                return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
-                    behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
-                    values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
-                    purpose: user.purpose, deliberate_practices: user.deliberate_practices });
-            } else {
-                console.log('guest not null');
-                var user = req.session.guest;
-                return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
-                    behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
-                    values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
-                    purpose: user.purpose, deliberate_practices: user.deliberate_practices });
-            }
+            var user = req.session.guest;
+            console.log(res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
+                behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
+                values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
+                purpose: user.purpose, deliberate_practices: user.deliberate_practices }))
+            return res.json({imgDrags: user.imgDrags, netid: user.netid, firstName: user.firstName, lastName: user.lastName, stress: user.stress, strengths: user.strengths,
+                behaviors: user.behaviors, energy: user.energy, experience_bias: user.experience_bias, voice: user.voice,
+                values: user.values, fixed_mindset: user.fixed_mindset, growth_mindset: user.growth_mindset, vision: user.vision,
+                purpose: user.purpose, deliberate_practices: user.deliberate_practices });
         } else {
             var myquery = {netid : req.session.netid};
             User.findOne(myquery, function(err, user) {

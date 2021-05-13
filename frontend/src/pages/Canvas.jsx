@@ -533,7 +533,8 @@ class Canvas extends Component {
         axios.get('/userinfo', {withCredentials: true})
             .then(res => {
                 var data = res.data;
-                console.log('user read');
+                console.log('user read, here is the data:');
+                console.log(data)
                 if(data.netid) {
                     console.log(data.netid);
                     console.log(data)
