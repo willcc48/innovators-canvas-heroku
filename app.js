@@ -110,8 +110,8 @@ app.post('/canvas_data', async function(req, res) {
 
     if(req.session.netid === 'Guest') {
         console.log('saving canvas data')
-        req.session.user = new User({
-            imgDrags: userData['imgDrags'], netid: req.session.netid, firstName: req.session.firstName, lastName: req.session.lastName,
+        req.session.guest = new User({
+            imgDrags: userData['imgDrags'], netid: req.session.netid, firstName: '', lastName: '',
             stress: userData['stress'], strengths: userData['strengths'], behaviors: userData['behaviors'], energy: userData['energy'],
             experience_bias: userData['experience_bias'], voice: userData['voice'], values: userData['values'], 
             fixed_mindset: userData['fixed_mindset'], growth_mindset: userData['growth_mindset'], vision: userData['vision'],
@@ -140,6 +140,8 @@ app.post('/', function(req, res) {
             experience_bias: '<h3>Experience Bias</h3>', voice: '<h3>Voice</h3>', values: '<h3>Values</h3>', fixed_mindset: '<h3>Fixed Mindset</h3>',
             growth_mindset: '<h3>Growth Mindset</h3>', vision: '<h3>Vision</h3>', purpose: '<h3>Purpose</h3>',
             deliberate_practices: '<h3>Deliberate Practices</h3>'});
+        console.log('this is the new user');
+        console.log(req.session.guest);
         res.send('done');
     }
     else {
