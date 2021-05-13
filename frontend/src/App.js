@@ -18,6 +18,7 @@ class App extends Component {
 					<Canvas path="/canvas" />
 					<Login path="/login"/>
 					<GuestLogin path="/guest_login"/>
+					<GuestLogout path="/guest_logout"/>
 					<Logout path="/logout"/>
 				</Router>
 			</div>
